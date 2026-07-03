@@ -48,7 +48,7 @@
 
         <!-- Publications -->
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
+          <a class="navbar-item">
             Publications
           </a>
           <div class="navbar-dropdown" id="navbar-publications">
@@ -144,7 +144,7 @@
           <div class="content has-text-left">            
             <img src="./static/images/profile_picture.png" alt="Benjamin Greenland" style="float: right; margin: 0 0 1rem 1.5rem; width: 250px; border-radius: 8px;">            
             <p>
-              Hi, I’m <strong>Ben Greenland</strong>, a PhD researcher specialising in soft robotics. My research focuses on a fundamental feature in robotics: balancing the high-dimensional complexity of human-like dexterity with the elegant simplicity required for robust, real-world soft robotic systems.
+              Hi, I’m <b>Ben Greenland</b>, a PhD researcher specialising in soft robotics. My research focuses on a fundamental feature in robotics: balancing the high-dimensional complexity of human-like dexterity with the elegant simplicity required for robust, real-world soft robotic systems.
             </p>
 
             <p>
@@ -157,13 +157,13 @@
 
             <ul class="research-pillars">
               <li>
-                <strong>Hardware & Compliance:</strong> Investigating underactuated design methodologies that reduce mechatronic complexity while ensuring robots can safely adapt to varied object geometries and transition between fragile handling and high-force tasks.
+                <b>Hardware & Compliance:</b> Investigating underactuated design methodologies that reduce mechatronic complexity while ensuring robots can safely adapt to varied object geometries and transition between fragile handling and high-force tasks.
               </li>
               <li>
-                <strong>Performance Evaluation:</strong> Developing evaluation metrics and experimental protocols to assess the in-hand manipulation performance of soft robotic systems.
+                <b>Performance Evaluation:</b> Developing evaluation metrics and experimental protocols to assess the in-hand manipulation performance of soft robotic systems.
               </li>
               <li>
-                <strong>Design Optimisation:</strong> Utilising computational frameworks to evaluate how physical finger geometry and sensor configurations can be concurrently structured to maximise system performance.
+                <b>Design Optimisation:</b> Utilising computational frameworks to evaluate how physical finger geometry and sensor configurations can be concurrently structured to maximise system performance.
               </li>
             </ul>
 
@@ -212,6 +212,8 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
     <!-- Footer -->
   <footer class="footer">
@@ -228,62 +230,12 @@
     </div>
   </footer>
 
-  <script>
-    // Load and render publications from JSON
-    async function loadPublications() {
-      try {
-        const response = await fetch('./publications.json');
-        const publications = await response.json();
-        
-        // Populate navbar dropdown
-        const navbarDropdown = document.getElementById('navbar-publications');
-        publications.forEach(pub => {
-          const link = document.createElement('a');
-          link.className = 'navbar-item';
-          link.href = pub.links.website;
-          link.target = '_blank';
-          link.textContent = `${pub.title}, ${pub.year}`;
-          navbarDropdown.appendChild(link);
-        });
-        
-        // Render publications list
-        const publicationsList = document.getElementById('publications-list');
-        publications.forEach(pub => {
-          const li = document.createElement('li');
-          li.style.display = 'flex';
-          li.style.alignItems = 'flex-start';
-          li.style.gap = '1rem';
-          li.style.marginBottom = '1rem';
-          
-          let linksHTML = '';
-          if (pub.links.paper) linksHTML += `<a href="${pub.links.paper}" target="_blank">[Paper]</a>`;
-          if (pub.links.poster) linksHTML += ` | <a href="${pub.links.poster}" target="_blank">[Poster]</a>`;
-          if (pub.links.video) linksHTML += ` | <a href="${pub.links.video}" target="_blank">[Video]</a>`;
-          if (pub.links.code) linksHTML += ` | <a href="${pub.links.code}" target="_blank">[Code]</a>`;
-          
-          li.innerHTML = `
-            <div style="flex:0 0 auto;">
-              <img src="${pub.image}" alt="${pub.title}" style="width:120px; height:auto; object-fit:cover; border-radius:0.25rem;">
-            </div>
-            <div style="flex:1;">
-              <a href="${pub.links.website}" target="_blank">
-                <strong>${pub.title}</strong>
-              </a>
-              <br>
-              ${pub.authors}.
-              <br>
-              <em>${pub.venue}, ${pub.year}</em>
-              <br>
-              ${linksHTML}
-            </div>
-          `;
-          publicationsList.appendChild(li);
-        });
-      } catch (error) {
-        console.error('Error loading publications:', error);
-      }
-    }
-    
+  
+  <button id="theme-toggle" class="theme-toggle-button light" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <script>    
     // Load publications when DOM is ready
     document.addEventListener('DOMContentLoaded', loadPublications);
   </script>

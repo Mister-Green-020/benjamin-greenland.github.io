@@ -76,3 +76,110 @@ $(document).ready(function() {
     bulmaSlider.attach();
 
 })
+
+function setTheme(isDark) {
+  const body = document.body;
+  const button = document.getElementById('theme-toggle');
+  const icon = button.querySelector('i');
+
+  if (isDark) {
+    body.classList.add('dark-mode');
+    button.classList.remove('light');
+    button.classList.add('dark');
+    icon.className = 'fas fa-sun';
+  } else {
+    body.classList.remove('dark-mode');
+    button.classList.remove('dark');
+    button.classList.add('light');
+    icon.className = 'fas fa-moon';
+  }
+
+  localStorage.setItem('siteTheme', isDark ? 'dark' : 'light');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const savedTheme = localStorage.getItem('siteTheme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const useDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+  setTheme(useDark);
+
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    setTheme(!document.body.classList.contains('dark-mode'));
+  });
+});
+
+// Load and render publications from author page JSON
+async function loadPublications() {
+try {
+  const response = await fetch('https://benjamin-greenland.github.io/publications.json');
+  const publications = await response.json();
+  
+  // Populate navbar dropdown
+  const navbarDropdown = document.getElementById('navbar-publications');
+  publications.forEach(pub => {
+    const link = document.createElement('a');
+    link.className = 'navbar-item';
+    link.href = pub.links.website;
+    link.target = '_blank';
+    link.textContent = `${pub.title}, ${pub.year}`;
+    navbarDropdown.appendChild(link);
+  });
+} catch (error) {
+  console.error('Error loading publications:', error);
+}
+}
+
+// Load and render publications from JSON
+async function loadPublications() {
+  try {
+    const response = await fetch('./publications.json');
+    const publications = await response.json();
+    
+    // Populate navbar dropdown
+    const navbarDropdown = document.getElementById('navbar-publications');
+    publications.forEach(pub => {
+      const link = document.createElement('a');
+      link.className = 'navbar-item';
+      link.href = pub.links.website;
+      link.target = '_blank';
+      link.textContent = `${pub.title}, ${pub.year}`;
+      navbarDropdown.appendChild(link);
+    });
+    
+    // Render publications list
+    const publicationsList = document.getElementById('publications-list');
+    publications.forEach(pub => {
+      const li = document.createElement('li');
+      li.style.display = 'flex';
+      li.style.alignItems = 'flex-start';
+      li.style.gap = '1rem';
+      li.style.marginBottom = '1rem';
+      
+      let linksHTML = '';
+      if (pub.links.paper) linksHTML += `<a href="${pub.links.paper}" target="_blank">[Paper]</a>`;
+      if (pub.links.poster) linksHTML += ` | <a href="${pub.links.poster}" target="_blank">[Poster]</a>`;
+      if (pub.links.video) linksHTML += ` | <a href="${pub.links.video}" target="_blank">[Video]</a>`;
+      if (pub.links.code) linksHTML += ` | <a href="${pub.links.code}" target="_blank">[Code]</a>`;
+      
+      li.innerHTML = `
+        <div style="flex:0 0 auto;">
+          <img src="${pub.image}" alt="${pub.title}" style="width:120px; height:auto; object-fit:cover; border-radius:0.25rem;">
+        </div>
+        <div style="flex:1;">
+          <a href="${pub.links.website}" target="_blank">
+            <strong>${pub.title}</strong>
+          </a>
+          <br>
+          ${pub.authors}.
+          <br>
+          <em>${pub.venue}, ${pub.year}</em>
+          <br>
+          ${linksHTML}
+        </div>
+      `;
+      publicationsList.appendChild(li);
+    });
+  } catch (error) {
+    console.error('Error loading publications:', error);
+  }
+}

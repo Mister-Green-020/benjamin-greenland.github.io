@@ -2,15 +2,33 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
-
-.footer .icon-link {
-    font-size: 25px;
-    color: #000;
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.link-block a {
-    margin-top: 5px;
-    margin-bottom: 5px;
+.link-block span {
+  color: #ffffff;
+}
+
+section a,
+footer a,
+body.dark-mode section a,
+body.dark-mode footer a {
+  color: #209cee !important;
+}
+
+section a:hover,
+footer a:hover,
+body.dark-mode section a:hover,
+body.dark-mode footer a:hover {
+  text-decoration: underline;
+}
+
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
 }
 
 .dnerf {
@@ -33,7 +51,6 @@ body {
 
 .publication-banner {
   max-height: parent;
-
 }
 
 .publication-banner video {
@@ -48,34 +65,35 @@ body {
 }
 
 .publication-title {
-    font-family: 'Google Sans', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .publication-authors {
-    font-family: 'Google Sans', sans-serif;
+  font-family: 'Google Sans', sans-serif;
 }
 
 .publication-venue {
-    color: #555;
-    width: fit-content;
-    font-weight: bold;
+  color: #555;
+  width: fit-content;
+  font-weight: bold;
+  text-align: right;
 }
 
 .publication-awards {
-    color: #ff3860;
-    width: fit-content;
-    font-weight: bolder;
+  color: #ff3860;
+  width: fit-content;
+  font-weight: bolder;
 }
 
 .publication-authors {
 }
 
 .publication-authors a {
-   color: hsl(204, 86%, 53%) !important;
+  color: #209cee !important;
 }
 
 .publication-authors a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .author-block {
@@ -90,24 +108,21 @@ body {
 }
 
 .publication-video {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
 
-    overflow: visible;
-    border-radius: 10px !important;
+  overflow: visible;
+  border-radius: 10px !important;
 }
 
 .publication-video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.publication-body img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .results-carousel {
@@ -158,42 +173,35 @@ body {
 
 .gradient-text {
   font-size: 2em; /* Adjust the size as needed */
-  background: linear-gradient(to right, #0437F2, #01eaff); /* Blue to green gradient */
+  background: linear-gradient(to right, #0437F2, #01eaff); /* Blue to cyan gradient */
   -webkit-background-clip: text;
   color: transparent;
 }
 
 .gradient-text-small {
   font-size: 1em; /* Adjust the size as needed */
-  background: linear-gradient(to right, #0437F2, #1efca7); /* Blue to green gradient */
+  background: linear-gradient(to right, #0437F2, #01eaff); /* Blue to cyan gradient */
   -webkit-background-clip: text;
   color: transparent;
 }
 
 .gradient-button {
-  border: 2px solid transparent;
-  border-radius: 999px;
-
-  background:
-    linear-gradient(#fff, #fff) padding-box,
-    linear-gradient(to right, #0437F2, #1efca7) border-box;
-
-  color: inherit;   
+  background: linear-gradient(90deg, #0437F2, #01eaff); 
+  border: none;
+  border-radius: 15px;
+  
+  color: #ffffff;
+  text-align: center;
   transition: all 0.3s ease;
 }
 
 .gradient-button:hover {
-  border: 2px solid white;
-
-  background:
-    linear-gradient(
-      to right,
-       #0437F2, 
-       #1efca7
-    ) padding-box,
-    linear-gradient(to right, #0437F2, #1efca7) border-box;
-
-  color: white;
+  background: linear-gradient(90deg, #0437F2, #01eaff); 
+  border: none;
+  border-radius: 15px;
+  
+  color: #00eefffa; 
+  text-align: center;
 }
 
 .centered-image {
@@ -217,6 +225,135 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.theme-toggle-button {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.theme-toggle-button:hover {
+  transform: translateY(-2px);
+}
+
+.theme-toggle-button.light {
+  background-color: #101010;
+  color: #ffffff;
+}
+
+.theme-toggle-button.dark {
+  background-color: #ffffff;
+  color: #101010;
+}
+
+/* Section backgrounds alternate between two colors in light and dark mode */
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #000000;
+  --section-bg-odd: #f8f8f8;
+  --section-bg-even: #ffffff;
+  --border-color: #000000;
+}
+
+body.dark-mode {
+  --bg-color: #1e1e1e;
+  --text-color: #ffffff;
+  --section-bg-odd: #1e1e1e;
+  --section-bg-even: #101010;
+  --border-color: #ffffff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6,
+.title, .subtitle {
+  color: inherit !important;
+}
+
+body .section:nth-of-type(odd),
+body .hero:nth-of-type(odd),
+body .footer:nth-of-type(odd) {
+  background-color: var(--section-bg-odd);
+}
+
+body .section:nth-of-type(even),
+body .hero:nth-of-type(even),
+body .footer:nth-of-type(even) {
+  background-color: var(--section-bg-even);
+}
+
+body.dark-mode .section:nth-of-type(odd),
+body.dark-mode .hero:nth-of-type(odd),
+body.dark-mode .footer:nth-of-type(odd) {
+  background-color: var(--section-bg-odd) !important;
+}
+
+body.dark-mode .section:nth-of-type(even),
+body.dark-mode .hero:nth-of-type(even),
+body.dark-mode .footer:nth-of-type(even) {
+  background-color: var(--section-bg-even) !important;
+}
+
+
+body.dark-mode .button.is-dark,
+body.dark-mode .button.is-primary {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode pre.bibtex {
+  background-color: #1e1e1e !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navbar,
+.navbar .navbar-menu,
+.navbar .navbar-link,
+.navbar .navbar-item,
+.navbar .navbar-item:hover {
+  background-color: inherit;
+  color: inherit;
+}
+
+.navbar .navbar-dropdown {
+  background-color: inherit;
+}
+
+.navbar .navbar-dropdown .navbar-item {
+  color: inherit;
+  background-color: inherit;
+}
+
+.navbar .navbar-dropdown .navbar-item:is(:hover, .is-active) {
+  text-decoration: underline;
+}
+
+body.dark-mode .navbar .navbar-dropdown,
+body.dark-mode .navbar .navbar-dropdown .navbar-item {
+  background-color: inherit !important;
+  color: #ffffff !important;
+}
+
+.content img,
+.section img,
+.publication-video img {
+  background-color: inherit;
 }
 
 /* Center Swiper navigation buttons relative to .b-dics */
